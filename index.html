@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Teacher's Day 💌</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffe6f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff0f6;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(231, 84, 128, 0.4);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+      min-height: 360px;
+    }
+
+    .page {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.6s ease;
+      pointer-events: none;
+    }
+
+    .page.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    h1 {
+      color: #e75480;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #b3003b;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #e75480;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin: 0 10px;
+    }
+
+    button:hover {
+      background: #b3003b;
+    }
+
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 180px;
+      margin: 0 auto 20px;
+      background: #ff66a3;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(179, 0, 59, 0.3);
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 90px;
+      background: #e75480;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      z-index: 2;
+    }
+
+    .letter {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 130px;
+      background: white;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      z-index: 1;
+      color: #b3003b;
+      font-weight: 600;
+    }
+
+    .nav-buttons {
+      margin-top: 20px;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      width: 20px;
+      height: 20px;
+      background: #e75480;
+      transform: rotate(45deg);
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+      z-index: 5;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #e75480;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Page 1 -->
+    <div class="page active" id="page1">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+        <div class="letter">
+          <p style="font-size: 20px;">Hi Jassy💖<br>I made something special for you.</p>
+
+        </div>
+      </div>
+      <button id="openBtn">Open Letter 💌</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page" id="page2">
+     <h1>Happy Teacher’s Day, My Future LPT! 🌼</h1>
+
+<p>
+  You are the most beautiful woman I have ever met,<br><br>
+  I just want you to know that I’ll always be here to support you. <br>
+  Keep pursuing your dreams until you reach the success you truly deserve.<br><br>
+  I’ll always be proud of you — because you’ve earned it. ✨
+</p>
+
+      <div class="nav-buttons">
+        <button onclick="goToPage(1)">← Back</button>
+        <button onclick="goToPage(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="page" id="page3">
+      <h1>Ito'y para sayo,Jassy!💌</h1>
+      <p>
+        Ang aking FUTURE LPT,<br><br>
+        Hindi ko man maipakita araw-araw, pero sobrang naaappriciate kita. 
+        Salamat sa iyong pagmamahal,pag-intindi, pag-aalaga, at sa pagiging inspirasyon hindi lang sa akin kundi pati sa ibang tao.
+        Napakalaki ng naitulong mo saakin upang mas maging matured.💕
+        Alam kong malayo ang mararting mo,basta't palagi mong tatandaan na "God is always there for you".<br><br>
+        I love you always,💖<br>
+        –Teerak
+      </p>
+      <button onclick="goToPage(1)">Back to Start ✉️</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Floating hearts
+    const heartsCount = 40;
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+      const size = 12 + Math.random() * 12;
+      heart.style.width = heart.style.height = size + 'px';
+      heart.style.opacity = (0.5 + Math.random() * 0.5);
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 250);
+    for (let i = 0; i < heartsCount; i++) {
+      setTimeout(createHeart, i * 250);
+    }
+
+    // Fade + Zoom transition
+    let currentPage = 1;
+    function goToPage(num) {
+      if (num === currentPage) return;
+      const current = document.getElementById(`page${currentPage}`);
+      const next = document.getElementById(`page${num}`);
+
+      // Animate out current
+      current.classList.remove('active');
+
+      // Animate in next
+      setTimeout(() => {
+        next.classList.add('active');
+        currentPage = num;
+      }, 100);
+    }
+
+    document.getElementById('openBtn').onclick = () => goToPage(2);
+    document.getElementById('envelope').onclick = () => goToPage(2);
+  </script>
+
+</body>
+</html>
